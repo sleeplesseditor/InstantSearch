@@ -1,5 +1,29 @@
 import React, { Component } from 'react';
-import { InstantSearch, SearchBox } from 'react-instantsearch-dom';
+import { 
+  Highlight, 
+  Hits, 
+  InstantSearch, 
+  SearchBox 
+} from 'react-instantsearch-dom';
+import './App.css';
+
+const Hit = ({ hit }) => <div className="hit">
+  <div className="hitImage">
+    <img src={hit.image} alt="item"/>
+  </div>
+  <div className="hitName">
+    <Highlight 
+      attribute="name"
+      hit={hit}
+    />
+  </div>
+</div>
+
+const Content = () => <div className="content">
+  <Hits 
+    hitComponent={Hit} 
+  />
+</div>
 
 class App extends Component {
   render() {
@@ -13,8 +37,12 @@ class App extends Component {
           <header>
             <SearchBox 
               translations = {{ placeholder: 'Search Box'}}
+              className="search_box"
             />
           </header>
+          <main>
+            <Content />
+          </main>
         </InstantSearch>
       </div>
     );
